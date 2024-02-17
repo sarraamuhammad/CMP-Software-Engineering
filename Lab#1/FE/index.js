@@ -31,15 +31,39 @@ function fetchEmployees() {
 
 // TODO
 // add event listener to submit button
+document.getElementById('employeeForm').addEventListener('submit', function(event){
+  event.preventDefault();
+  createEmployee();
+}); 
 
 // TODO
 // add event listener to delete button
+document.getElementById('dataTable').addEventListener('click', function(event) {
+  if (event.target && event.target.nodeName == 'BUTTON' && event.target.textContent == 'Delete') {
+    const id = event.target.parentElement.parentElement.firstChild.textContent;
+    deleteEmployee(id);
+  }
+});
 
 // TODO
 function createEmployee (){
-  // get data from input field
-  // send data to BE
+  // get name
+  // send name to BE
   // call fetchEmployees
+  const name = document.getElementById('name').value;
+  fetch('http://localhost:3000/api/v1/employee', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name: name })
+  })
+  .then(response => response.json())
+  .then(data => {
+    fetchEmployees();
+  })
+  .catch(error => console.error(error));
+
 }
 
 // TODO
@@ -47,6 +71,15 @@ function deleteEmployee (){
   // get id
   // send id to BE
   // call fetchEmployees
+  fetch(`http://localhost:3000/api/v1/employee/${id}`, {
+    method: 'DELETE'
+  })
+  .then(response => response.json())
+  .then(data => {
+    fetchEmployees();
+  })
+  .catch(error => console.error(error));
 }
 
 fetchEmployees()
+
