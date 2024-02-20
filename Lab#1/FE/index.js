@@ -68,7 +68,7 @@ function createEmployee (){
 }
 
 // TODO
-function deleteEmployee (){
+function deleteEmployee (id){
   // get id
   // send id to BE
   // call fetchEmployees

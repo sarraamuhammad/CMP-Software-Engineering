@@ -10,6 +10,7 @@ exports.getEmployees = async (req, res, next) => {
 exports.deleteEmployee = async (req, res, next) => {
   const id = req.params.id;
   const index = employee.findIndex((emp) => emp.id === id);
+  console.log(index);
   employee.splice(index, 1);
   res.status(200).json({ data: employee });
 };
