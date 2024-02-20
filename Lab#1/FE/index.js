@@ -51,12 +51,13 @@ function createEmployee (){
   // send name to BE
   // call fetchEmployees
   const name = document.getElementById('name').value;
+  const id = document.getElementById('id').value;
   fetch('http://localhost:3000/api/v1/employee', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ name: name })
+    body: JSON.stringify({ id: id, name: name })
   })
   .then(response => response.json())
   .then(data => {
